@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paraná Ingeniería - En Construcción</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .email-box {
+            display: flex;
+            justify-content: center;
+        }
+
+        input {
+            padding: 10px;
+            border: none;
+            width: 70%;
+        }
+
+        button {
+            padding: 10px;
+            background: #e63946;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .social {
+            margin-top: 20px;
+        }
+
+        .social a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/web/public/destaque.jpg') no-repeat;
+            background-size: 55%;
+            clip-path: polygon(0 0, 60% 0, 50% 100%, 0% 100%);
+            z-index: 1;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 70%;
+            width: 30%;
+            height: 100%;
+            background-color: #1a1a1a;
+            z-index: 1;
+        }
+
+        @media (max-width: 1440px) {
+            .background {
+                background-size: 45%;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .background {
+                background-size: 35%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .background {
+                clip-path: none;
+                background-size: contain;
+            }
+
+            .overlay {
+                display: none;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            .background {
+                background-size: 65%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Paraná Ingeniería</h1>
+        <p>Estamos trabajando en algo increíble. ¡Pronto estaremos en línea!</p>
+        <div class="countdown" id="countdown">Cargando...</div>
+        <!-- <p>Déjanos tu correo para mantenerte informado:</p>
+        <div class="email-box">
+            <input type="email" placeholder="Tu correo electrónico">
+            <button>Enviar</button>
+        </div>
+        <div class="social">
+            <a href="#">📘</a>
+            <a href="#">🐦</a>
+            <a href="#">📷</a>
+        </div> -->
+    </div>
+    <script>
+        function startCountdown() {
+            const endDate = new Date();
+            endDate.setDate(endDate.getDate() + 60); // Cambia 30 por los días hasta el lanzamiento
+            function updateCountdown() {
+                const now = new Date();
+                const difference = endDate - now;
+                if (difference < 0) {
+                    document.getElementById("countdown").innerText = "¡Ya estamos en línea!";
+                    return;
+                }
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerText = `${days} días, ${hours}h ${minutes}m ${seconds}s`;
+            }
+            setInterval(updateCountdown, 1000);
+        }
+        startCountdown();
+    </script>
+</body>
+
+</html>
